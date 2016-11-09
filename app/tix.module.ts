@@ -8,6 +8,9 @@ import { HttpModule }    from '@angular/http';
 
 import { TixRoutingModule } from './tix-routing.module';
 import { TixComponent }         from './tix.component';
+import {HeaderComponent} from "./common/header.component";
+import {UserService} from './auth/user.service';
+import {AuthorisationComponent} from "./auth/login.component";
 
 
 @NgModule({
@@ -18,9 +21,14 @@ import { TixComponent }         from './tix.component';
         TixRoutingModule
     ],
     declarations: [
-        TixComponent
+        TixComponent,
+        HeaderComponent,
+        AuthorisationComponent,
     ],
-    providers: [  ],
+    providers: [
+        UserService,
+        Location
+    ],
     bootstrap: [ TixComponent ]
 })
 export class TixModule { }

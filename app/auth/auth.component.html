@@ -1,0 +1,14 @@
+<form>
+    <div class="input-holder">
+        <label >email:</label>
+        <input #email type="text" placeholder="Paste your email here"/>
+    </div>
+    <div class="input-holder">
+        <label>password:</label>
+        <input #password type="password" placeholder="Enter your password here"/>
+    </div>
+    <div class="input-holder">
+        <button type="button" (click)="this.login(email.value, password.value)">LOGIN</button>
+        <button type="button">REGISTER</button>
+    </div>
+</form>

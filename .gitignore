@@ -1,6 +1,8 @@
 # Generated files
 app/*.js
 app/*.map
+app/*/*.js
+app/*/*.map
 
 # NPM dependencies
 node_modules

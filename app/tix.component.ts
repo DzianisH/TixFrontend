@@ -2,21 +2,33 @@
  * Created by DzianisH on 07.11.2016.
  */
 
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
+import {UserService} from "./auth/user.service";
+import {Router} from "@angular/router";
 
 @Component({
     moduleId: module.id,
-    selector: 'my-app',
+    selector: 'tix',
     template: `
-  <h1>{{title}}</h1>
-  <nav>
-    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-    <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
-  </nav>
-  <router-outlet></router-outlet>
-`,
-    providers: [ ]
+<header></header>  
+<router-outlet></router-outlet>
+`
 })
-export class TixComponent{
-    title = 'Tour of Heroes';
+export class TixComponent implements OnInit{
+    private loginPage = '/login';
+
+    constructor(
+        private userService: UserService,
+        private router: Router
+    ){}
+
+    ngOnInit(): void {
+        this.userService.isUserAuthorised().then(auth =>{
+            console.log(auth);
+             console.log("User authorised: " + auth);
+            if(!auth){
+                this.router.navigateByUrl(this.loginPage);
+           }
+        });
+    }
 }
