@@ -15,7 +15,7 @@ import {Router} from "@angular/router";
 `
 })
 export class TixComponent implements OnInit{
-    private loginPage = '/login';
+    private authPage = '/auth';
 
     constructor(
         private userService: UserService,
@@ -27,7 +27,7 @@ export class TixComponent implements OnInit{
             console.log(auth);
              console.log("User authorised: " + auth);
             if(!auth){
-                this.router.navigateByUrl(this.loginPage);
+                this.router.navigateByUrl(this.authPage);
            }
         });
     }

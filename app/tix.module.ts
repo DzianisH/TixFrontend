@@ -10,7 +10,7 @@ import { TixRoutingModule } from './tix-routing.module';
 import { TixComponent }         from './tix.component';
 import {HeaderComponent} from "./common/header.component";
 import {UserService} from './auth/user.service';
-import {AuthorisationComponent} from "./auth/login.component";
+import {AuthComponent} from "./auth/auth.component";
 
 
 @NgModule({
@@ -23,7 +23,7 @@ import {AuthorisationComponent} from "./auth/login.component";
     declarations: [
         TixComponent,
         HeaderComponent,
-        AuthorisationComponent,
+        AuthComponent,
     ],
     providers: [
         UserService,

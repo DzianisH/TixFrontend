@@ -4,3 +4,15 @@
     text-align: justify;
     text-justify: inter-word;
 }
+
+
+.auth-button{
+    background: #93e2ff;
+    color: #380002;
+}
+
+.auth-button:disabled{
+    cursor: not-allowed;
+    color: #c0c0c0;
+    background-color: #ffffff;
+}
