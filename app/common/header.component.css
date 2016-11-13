@@ -1,9 +1,12 @@
 .header{
     width:100%;
     height: 3em;
-    background: #393d4f;
+    background: #4c6685;
+    padding: 0;
+    margin: 0;
+    border: none;
 }
 
 .logo{
-    color: #ffffff;
+    color: #f9f9f9;
 }

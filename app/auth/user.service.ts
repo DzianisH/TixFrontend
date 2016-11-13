@@ -53,27 +53,36 @@ export class UserService {
     }
 
     isEmailFree(email: string): Promise<boolean>{
-        if(email === undefined || email === null || email === ''){
-            return Promise.reject("can't be null or empty");
-        }
-        return this.http
-            .get(
-                `${this.registerUri}/${email}/free`
-            )
-            .toPromise()
-            .then(res => {
-                this.logSuccess(res);
-                return res.json();
-            })
-            .catch(this.handleError)
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            if(email === undefined || email === null || email === ''){
+                reject("Can't be null!");
+            } else {
+                _this.http
+                    .get(
+                        `${_this.registerUri}/${email}/free`
+                    )
+                    .toPromise()
+                    .then(res => {
+                        resolve(res.json());
+                        _this.logSuccess(res);
+                    })
+                    .catch(err => {
+                        reject(err);
+                        _this.handleError(err)
+                    })
+                    .catch();
+            }
+        });
     }
 
     private logSuccess(res: any){
         console.log("Returned Success: " + res);
-        console.log("Response data: " + JSON.stringify(res.json()));
+        // console.log("Response data: " + JSON.stringify(res.json()));
     }
 
     private handleError(err: any){
         console.log("Returned Error: " + err);
+        console.error(err);
     }
 }

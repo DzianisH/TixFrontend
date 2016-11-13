@@ -1,18 +1,51 @@
 
-.input-holder{
-    margin: 1em;
-    text-align: justify;
-    text-justify: inter-word;
+.buttons-wrapper {
+    margin: 0 auto;
+    width: 25%;
+    border: none;
+    padding: 0;
 }
 
-
-.auth-button{
-    background: #93e2ff;
-    color: #380002;
+.button-holder {
+    margin: 0.5em auto;
+    padding: 0.3em 0.5em;
+    border-radius: 13px;
+    width: auto;
+    background: rgb(73, 139, 244);
+    color: rgb(240, 241, 243);
+    font-weight: bold;
 }
+.button-holder:hover {
+    background: rgb(66, 134, 244);
+    color: rgb(255, 255, 255);
+ }
 
-.auth-button:disabled{
+.button-holder:disabled{
+    border-radius: 12px;
     cursor: not-allowed;
     color: #c0c0c0;
-    background-color: #ffffff;
+    background: rgb(266, 255, 255);
+    font-weight: normal;
+}
+
+
+
+.input-wrapper {
+    margin: 0 auto;
+    width: 50%;
+    border: none;
+    padding: 0;
+}
+
+.input-holder{
+    margin: 0.5em auto;
+    width: 100%;
+    border: 1px solid #5d4f6c;
+    padding: 0.4em;
+}
+
+.input-holder:focus{
+    border-radius: 1px;
+    border: 1px solid rgb(83, 173, 255);
+    box-shadow: 2px 2px 4px rgba(76, 204, 255, 0.41);
 }

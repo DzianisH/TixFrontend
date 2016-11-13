@@ -1,14 +1,12 @@
 <form>
-    <div class="input-holder">
-        <label>email:</label>
-        <input #email (keyup)="this.checkEmailIsFree(email.value)" type="text" placeholder="Paste your email here"/>
+    <div class="input-wrapper">
+        <input class="input-holder" #email (keyup)="this.checkEmailIsFree(email.value)" type="text" placeholder="Enter your email"/>
     </div>
-    <div class="input-holder">
-        <label>password:</label>
-        <input #password type="password" placeholder="Enter your password here"/>
+    <div class="input-wrapper">
+        <input class="input-holder" #password type="password" placeholder="Enter your password"/>
     </div>
-    <div class="input-holder">
-        <button type="button" class="auth-button" [disabled]="canLogin">LOGIN</button>
-        <button type="button" class="auth-button" [disabled]="canRegister">REGISTER</button>
+    <div class="buttons-wrapper">
+        <button type="button" class="button-holder" autofocus [disabled]="!canLogin">LOGIN</button>
+        <button type="button" class="button-holder" [disabled]="!canRegister">REGISTER</button>
     </div>
 </form>

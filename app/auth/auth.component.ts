@@ -18,8 +18,9 @@ import {errorHandler} from "@angular/platform-browser/src/browser";
     styleUrls: ['auth.component.css']
 })
 export class AuthComponent implements OnInit{
-    private canLogin: boolean = true;
-    private canRegister: boolean = true;
+    private canLogin: boolean;
+    private canRegister: boolean;
+
     private checkTerm = new Subject<string>();
 
 
@@ -31,31 +32,19 @@ export class AuthComponent implements OnInit{
             .distinctUntilChanged()   // ignore if next search term is same as previous
             .switchMap(
                 term => this.userService.isEmailFree(term)
-                    .then(resp => {
-                        this.handleResponse(resp);
+                    .then(isEmailFree => {
+                        this.canLogin = !isEmailFree;
+                        this.canRegister = isEmailFree;
                     })
                     .catch(err => {
                         this.handleError(err);
                     })
             ).toPromise();
-        this.checkTerm.next(null);
-    }
-
-    private handleResponse(res: boolean): boolean{
-        if(res != null) {
-            this.canLogin = res;
-            this.canRegister = !res;
-            console.log(this.canLogin + " " + this.canRegister);
-        } else {
-            this.canLogin = false;
-            this.canRegister = false;
-            console.log("Response is null!");
-        }
-        return res;
     }
 
     private handleError(error){
         console.log("Unexpected error occurred " + error);
+        console.error(error);
         this.canLogin = false;
         this.canRegister = false;
     }
@@ -63,13 +52,13 @@ export class AuthComponent implements OnInit{
     login(email: string, password: string): void{
         this.userService.login(email, password)
             .then(user => console.log("SUCCESS  " + user))
-            .catch(err => console.log("ERROR " + err));
+            .catch(err => console.error(err));
     }
 
     register(email: string, password: string): void{
         this.userService.register(email, password)
             .then(user => console.log("SUCCESS  " + user))
-            .catch(err => console.log("ERROR " + err));
+            .catch(err => console.error(err));
     }
 
     checkEmailIsFree(email: string): void{
