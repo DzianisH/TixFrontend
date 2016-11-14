@@ -10,7 +10,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
-import {errorHandler} from "@angular/platform-browser/src/browser";
+import {Router} from "@angular/router";
 
 @Component({
     moduleId: module.id,
@@ -20,11 +20,16 @@ import {errorHandler} from "@angular/platform-browser/src/browser";
 export class AuthComponent implements OnInit{
     private canLogin: boolean;
     private canRegister: boolean;
+    private infoText = 'Just fill the above statements to log in.';
 
     private checkTerm = new Subject<string>();
 
 
-    constructor(private userService: UserService){}
+    constructor(
+        private userService: UserService,
+        // private location: Location,
+        private router: Router
+    ){}
 
     ngOnInit(): void {
         this.checkTerm
@@ -51,17 +56,27 @@ export class AuthComponent implements OnInit{
 
     login(email: string, password: string): void{
         this.userService.login(email, password)
-            .then(user => console.log("SUCCESS  " + user))
+            .then(res => this.handleAuthSuccess(res))
             .catch(err => console.error(err));
     }
 
-    register(email: string, password: string): void{
-        this.userService.register(email, password)
-            .then(user => console.log("SUCCESS  " + user))
-            .catch(err => console.error(err));
+    register(email: string, password: string, passwordConfirmation: string): void{
+        if(password === passwordConfirmation) {
+            console.log(password + "  === " + passwordConfirmation);
+            this.userService.register(email, password)
+                .then(res => this.handleAuthSuccess(res))
+                .catch(err => console.error(err));
+        } else {
+            // handle me
+        }
     }
 
     checkEmailIsFree(email: string): void{
         this.checkTerm.next(email);
+    }
+
+    private handleAuthSuccess(user: any){
+        console.log("SUCCESS: " + JSON.stringify(user));
+        this.router.navigateByUrl("/chat");
     }
 }

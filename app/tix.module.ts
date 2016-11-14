@@ -11,6 +11,8 @@ import { TixComponent }         from './tix.component';
 import {HeaderComponent} from "./common/header.component";
 import {UserService} from './auth/user.service';
 import {AuthComponent} from "./auth/auth.component";
+import {LogoutComponent} from "./common/logout.component";
+import {ChatPageComponent} from "./main/chat-page.component";
 
 
 @NgModule({
@@ -24,6 +26,8 @@ import {AuthComponent} from "./auth/auth.component";
         TixComponent,
         HeaderComponent,
         AuthComponent,
+        LogoutComponent,
+        ChatPageComponent
     ],
     providers: [
         UserService,
