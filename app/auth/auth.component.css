@@ -1,16 +1,20 @@
 
 .buttons-wrapper {
     margin: 0 auto;
-    width: 25%;
+    width: 35%;
+    align-content: center;
+    display: -webkit-flex;
+    display: flex;
     border: none;
     padding: 0;
 }
 
 .button-holder {
-    margin: 0.5em auto;
+    margin: 0.5em 0.2em;
     padding: 0.3em 0.5em;
+    outline: none;
     border-radius: 13px;
-    width: auto;
+    width: 100%;
     background: rgb(73, 139, 244);
     color: rgb(240, 241, 243);
     font-weight: bold;
@@ -21,11 +25,23 @@
  }
 
 .button-holder:disabled{
+    display: none;
     border-radius: 12px;
     cursor: not-allowed;
     color: #c0c0c0;
     background: rgb(266, 255, 255);
     font-weight: normal;
+}
+
+.help-text{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+    color: rgb(185, 185, 185);
+    font-size: 80%;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    /*font-style: italic;*/
 }
 
 

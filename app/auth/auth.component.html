@@ -5,8 +5,14 @@
     <div class="input-wrapper">
         <input class="input-holder" #password type="password" placeholder="Enter your password"/>
     </div>
+    <div class="input-wrapper" [ngClass]="{'invisable' : !canRegister}">
+        <input class="input-holder" #passwordConf type="password" placeholder="Confirm your password"/>
+    </div>
     <div class="buttons-wrapper">
         <button type="button" class="button-holder" autofocus [disabled]="!canLogin">LOGIN</button>
         <button type="button" class="button-holder" [disabled]="!canRegister">REGISTER</button>
+        <p class="help-text" [ngClass]="{'non-displayable': canRegister || canLogin}">
+            Just fill the above statements to log in.
+        </p>
     </div>
 </form>
