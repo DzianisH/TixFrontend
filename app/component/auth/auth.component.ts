@@ -21,7 +21,6 @@ import {Router} from "@angular/router";
 export class AuthComponent implements OnInit{
     private canLogin: boolean;
     private canRegister: boolean;
-    private infoText = 'Just fill the above statements to log in.';
 
     private checkTerm = new Subject<string>();
 

@@ -15,6 +15,7 @@ import {LogoutComponent} from "./component/common/logout.component";
 import {ChatPageComponent} from "./component/chat/chat-page.component";
 import {LoggedInGuard} from "./component/auth/logged-in.guard";
 import {HomePageComponent} from "./component/default/home-page.component";
+import {UserServiceImpl} from "./services/user-impl.service";
 
 
 @NgModule({
@@ -33,7 +34,7 @@ import {HomePageComponent} from "./component/default/home-page.component";
         HomePageComponent
     ],
     providers: [
-        UserService,
+        {provide: UserService, useClass: UserServiceImpl},
         LoggedInGuard,
         Location
     ],
