@@ -8,6 +8,7 @@ import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import {User} from '../domain/user';
+import {isUndefined} from "util";
 
 
 @Injectable()
@@ -15,9 +16,7 @@ export class UserService implements OnInit{
     private loginUri = "/api/login";
     private logoutUri = "/api/logout";
     private userUri = "/api/user";
-    private currentUser: User = null;
-
-    isAuthorised: boolean = false;
+    private currentUser: User = undefined;
 
 
     private headers = new Headers({'Content-Type': 'application/json'});
@@ -25,15 +24,23 @@ export class UserService implements OnInit{
     constructor(private http: Http){}
 
     ngOnInit(): void {
-        this.isUserAuthorised()
-            .then(res => this.isAuthorised = res)
-            .catch(err => this.isAuthorised = false);
+        console.log("C");
+        this.checkUserAuthorised().then();
     }
 
-    isUserAuthorised(): Promise<boolean>{
+    isUserAuthorised(): Promise<boolean>|boolean{
+        if (typeof this.currentUser === 'undefined') {
+            return this.checkUserAuthorised();
+        }
+        else {
+            return this.currentUser !== null;
+        }
+    }
+
+    checkUserAuthorised(): Promise<boolean>{
         var _self = this;
         return new Promise(function (resolve, reject) {
-            if(_self.currentUser !== null){
+            if(_self.currentUser !== null && typeof _self.currentUser !== 'undefined'){
                 resolve(true);
             } else {
                 _self.http
@@ -43,12 +50,13 @@ export class UserService implements OnInit{
                         UserService.logSuccess(res);
                         var user: User = res.json();
                         _self.authorizeUser(user);
+                        UserService.logSuccess(JSON.stringify(user));
                         resolve(true);
                         return user;
                     })
                     .catch(err => {
-                        // UserService.handleError(err);
-                        // reject(err);
+                        _self.unauthorizeUser();
+                        UserService.handleError(err);
                         reject(false);
                     });
             }
@@ -58,7 +66,6 @@ export class UserService implements OnInit{
     private authorizeUser(newUser: User): void{
         if(newUser === undefined) newUser = null;
         this.currentUser = newUser;
-        this.isAuthorised = newUser !== null;
     }
 
     private unauthorizeUser(): void{
@@ -141,7 +148,7 @@ export class UserService implements OnInit{
                 UserService.logSuccess(res);
                 _self.unauthorizeUser();
                 return res.json();
-            })
+            });
     }
 
     private static logSuccess(res: any){

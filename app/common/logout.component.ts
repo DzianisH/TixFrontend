@@ -24,7 +24,7 @@ export class LogoutComponent implements OnInit{
     }
 
     fetchIsAuth(){
-        this.userService.isUserAuthorised()
+        this.userService.checkUserAuthorised()
             .then(res => {
                 console.log(res +   "    AAAAAAAAAAAAAAA");
                 this.isAuthorised = res;

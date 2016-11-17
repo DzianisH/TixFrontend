@@ -13,6 +13,7 @@ import {UserService} from './services/user.service';
 import {AuthComponent} from "./auth/auth.component";
 import {LogoutComponent} from "./common/logout.component";
 import {ChatPageComponent} from "./main/chat-page.component";
+import {LoggedInGuard} from "./auth/logged-in.guard";
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import {ChatPageComponent} from "./main/chat-page.component";
     ],
     providers: [
         UserService,
+        LoggedInGuard,
         Location
     ],
     bootstrap: [ TixComponent ]
