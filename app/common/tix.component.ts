@@ -3,7 +3,7 @@
  */
 
 import {Component, OnInit} from "@angular/core";
-import {UserService} from "./auth/user.service";
+import {UserService} from "../services/user.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -27,11 +27,11 @@ export class TixComponent implements OnInit{
         this.userService.isUserAuthorised().then(auth =>{
             console.log(auth);
             console.log("User authorised: " + auth);
-            if(!auth){
-                this.router.navigateByUrl(this.authPage);
-            } else {
-                this.router.navigateByUrl(this.chatPage);
-            }
+            // if(!auth){
+            //     this.router.navigateByUrl(this.authPage);
+            // } else {
+            //     this.router.navigateByUrl(this.chatPage);
+            // }
         });
     }
 }
