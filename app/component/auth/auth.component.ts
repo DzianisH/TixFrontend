@@ -3,9 +3,9 @@
  */
 import {Component, OnInit} from "@angular/core";
 
-import {UserService} from "../services/user.service";
 import { Subject } from 'rxjs/Subject';
 
+import {UserService} from "../../services/user.service";
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -14,6 +14,7 @@ import {Router} from "@angular/router";
 
 @Component({
     moduleId: module.id,
+    selector: 'auth',
     templateUrl: 'auth.component.html',
     styleUrls: ['auth.component.css']
 })

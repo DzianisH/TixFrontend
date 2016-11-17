@@ -8,7 +8,6 @@ import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import {User} from '../domain/user';
-import {isUndefined} from "util";
 
 
 @Injectable()
@@ -24,8 +23,7 @@ export class UserService implements OnInit{
     constructor(private http: Http){}
 
     ngOnInit(): void {
-        console.log("C");
-        this.checkUserAuthorised().then();
+        this.checkUserAuthorised();
     }
 
     isUserAuthorised(): Promise<boolean>|boolean{

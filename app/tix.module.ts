@@ -7,13 +7,14 @@ import { FormsModule }   from '@angular/forms';
 import { HttpModule }    from '@angular/http';
 
 import { TixRoutingModule } from './tix-routing.module';
-import { TixComponent }         from './common/tix.component';
-import {HeaderComponent} from "./common/header.component";
+import { TixComponent }         from './component/tix.component';
+import {HeaderComponent} from "./component/common/header.component";
 import {UserService} from './services/user.service';
-import {AuthComponent} from "./auth/auth.component";
-import {LogoutComponent} from "./common/logout.component";
-import {ChatPageComponent} from "./main/chat-page.component";
-import {LoggedInGuard} from "./auth/logged-in.guard";
+import {AuthComponent} from "./component/auth/auth.component";
+import {LogoutComponent} from "./component/common/logout.component";
+import {ChatPageComponent} from "./component/chat/chat-page.component";
+import {LoggedInGuard} from "./component/auth/logged-in.guard";
+import {HomePageComponent} from "./component/default/home-page.component";
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {LoggedInGuard} from "./auth/logged-in.guard";
         HeaderComponent,
         AuthComponent,
         LogoutComponent,
-        ChatPageComponent
+        ChatPageComponent,
+        HomePageComponent
     ],
     providers: [
         UserService,

@@ -1,8 +1,17 @@
 # Generated files
+# TODO: simplify!
 app/*.js
 app/*.map
 app/*/*.js
 app/*/*.map
+app/*/*/*.js
+app/*/*/*.map
+app/*/*/*/*.js
+app/*/*/*/*.map
+app/*/*/*/*/*.js
+app/*/*/*/*/*.map
+app/*/*/*/*/*/*.js
+app/*/*/*/*/*/*.map
 
 # NPM dependencies
 node_modules
