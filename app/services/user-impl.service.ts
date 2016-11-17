@@ -10,7 +10,7 @@ import 'rxjs/add/operator/toPromise';
 import {User} from '../domain/user';
 import {UserService} from "./user.service";
 
-
+//TODO: Wrap angular core errors
 @Injectable()
 export class UserServiceImpl extends UserService implements OnInit{
     private loginUri = "/api/login";

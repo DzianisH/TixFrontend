@@ -1,1 +1,2 @@
-<p>Home page!</p>
+<auth *ngIf="!isAuthorised"></auth>
+<user-details *ngIf="isAuthorised"></user-details>

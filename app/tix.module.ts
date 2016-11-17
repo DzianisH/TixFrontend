@@ -11,11 +11,12 @@ import { TixComponent }         from './component/tix.component';
 import {HeaderComponent} from "./component/common/header.component";
 import {UserService} from './services/user.service';
 import {AuthComponent} from "./component/auth/auth.component";
-import {LogoutComponent} from "./component/common/logout.component";
+import {LogoutComponent} from "./component/auth/logout.component";
 import {ChatPageComponent} from "./component/chat/chat-page.component";
 import {LoggedInGuard} from "./component/auth/logged-in.guard";
 import {HomePageComponent} from "./component/default/home-page.component";
 import {UserServiceImpl} from "./services/user-impl.service";
+import {UserDetailsComponent} from "./component/default/user-details.component";
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {UserServiceImpl} from "./services/user-impl.service";
         AuthComponent,
         LogoutComponent,
         ChatPageComponent,
-        HomePageComponent
+        HomePageComponent,
+        UserDetailsComponent
     ],
     providers: [
         {provide: UserService, useClass: UserServiceImpl},
