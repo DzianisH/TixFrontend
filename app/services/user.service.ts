@@ -12,17 +12,11 @@ import {User} from '../domain/user';
 
 @Injectable()
 export abstract class UserService extends OnInit{
-    abstract ngOnInit();
-
-    abstract isUserAuthorised(): Promise<boolean>|boolean;
-
-    abstract checkUserAuthorised(): Promise<boolean>;
-
-    abstract login(email: string, password: string): Promise<User>;
-
-    abstract register(email: string, password: string): Promise<User>;
+    abstract isUserAuthorised(): Promise<boolean>;
+    abstract getCurrentUser(): Promise<User>;
 
     abstract isEmailFree(email: string): Promise<boolean>;
-
+    abstract login(email: string, password: string): Promise<User>;
+    abstract register(email: string, password: string): Promise<User>;
     abstract logout(): Promise<boolean>;
 }

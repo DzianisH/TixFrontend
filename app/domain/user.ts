@@ -3,7 +3,7 @@
  */
 
 export class User{
-    private id: number;
-    private email: string;
-    private password: string;
+    id: number;
+    email: string;
+    password: string;
 }
