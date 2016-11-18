@@ -16,9 +16,11 @@ app/*/*/*/*/*/*.map
 # NPM dependencies
 node_modules
 
-#IDEA files
+#IDE files
 .idea
 *.iml
+.vscode
+
 
 # Logs
 *.log
