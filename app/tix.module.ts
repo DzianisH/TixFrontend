@@ -17,7 +17,7 @@ import {LoggedInGuard} from "./component/auth/logged-in.guard";
 import {HomePageComponent} from "./component/default/home-page.component";
 import {UserServiceImpl} from "./services/user-impl.service";
 import {UserDetailsComponent} from "./component/default/user-details.component";
-
+import {RoomComponent} from "./component/chat/room.component";
 
 @NgModule({
     imports: [
@@ -33,7 +33,8 @@ import {UserDetailsComponent} from "./component/default/user-details.component";
         LogoutComponent,
         ChatPageComponent,
         HomePageComponent,
-        UserDetailsComponent
+        UserDetailsComponent,
+        RoomComponent
     ],
     providers: [
         {provide: UserService, useClass: UserServiceImpl},

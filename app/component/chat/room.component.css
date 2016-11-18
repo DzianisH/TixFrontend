@@ -1,0 +1,11 @@
+.room-wrapper{
+    width: 100%;
+    height: 70%;/*temporary !*/
+    background: #f0f0f4;
+    padding: 1em;
+}
+
+.room-holder{
+    width: auto;
+    height: 100%;
+}
