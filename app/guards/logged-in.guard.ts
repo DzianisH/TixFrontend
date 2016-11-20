@@ -4,7 +4,7 @@
 
 import {Injectable} from "@angular/core";
 import {CanActivate} from "@angular/router";
-import {UserService} from "../../services/user.service";
+import {UserService} from "../services/user.service";
 
 @Injectable()
 export class LoggedInGuard implements CanActivate{
@@ -13,10 +13,8 @@ export class LoggedInGuard implements CanActivate{
         private userService: UserService
     ){}
 
-    canActivate(): Promise<boolean>|boolean {
-        let isAuth = this.userService.isUserAuthorised();
-        console.log("user authenticated: " + isAuth);
-        return isAuth;
+    canActivate(): Promise<boolean> {
+        return this.userService.isUserAuthorised();
     }
 
 }
