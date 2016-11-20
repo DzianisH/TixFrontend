@@ -1,17 +1,17 @@
 <form>
     <div class="input-wrapper">
-        <input class="input-holder" #email (keyup)="this.checkEmailIsFree(email.value)" type="text" placeholder="Enter your email"/>
+        <input tabindex="1" class="input-holder" #email (keyup)="this.checkEmailIsFree(email.value)" type="text" placeholder="Enter your email"/>
     </div>
     <div class="input-wrapper">
-        <input class="input-holder" #password type="password" placeholder="Enter your password"/>
+        <input tabindex="2" class="input-holder" #password type="password" placeholder="Enter your password"/>
     </div>
     <div class="input-wrapper" [ngClass]="{'invisable' : !canRegister}">
-        <input class="input-holder" #passwordConf type="password" placeholder="Confirm your password"/>
+        <input tabindex="3" class="input-holder" #passwordConf type="password" placeholder="Confirm your password"/>
     </div>
     <div class="buttons-wrapper">
-        <button type="button" class="button-holder" autofocus [disabled]="!canLogin"
+        <button tabindex="4" type="button" class="button-holder" autofocus [disabled]="!canLogin"
             (click)="login(email.value, password.value)">LOGIN</button>
-        <button type="button" class="button-holder" [disabled]="!canRegister"
+        <button tabindex="5" type="button" class="button-holder" [disabled]="!canRegister"
             (click)="register(email.value, password.value, passwordConf.value)">REGISTER</button>
         <p class="help-text" [ngClass]="{'non-displayable': canRegister || canLogin}">
             Just fill the above statements to log in.

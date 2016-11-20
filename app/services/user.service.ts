@@ -10,7 +10,6 @@ import 'rxjs/add/operator/toPromise';
 import {User} from '../domain/user';
 
 
-@Injectable()
 export abstract class UserService extends OnInit{
     abstract isUserAuthorised(): Promise<boolean>;
     abstract getCurrentUser(): Promise<User>;
