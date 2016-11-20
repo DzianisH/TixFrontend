@@ -4,13 +4,11 @@
 
 
 import {Injectable, OnInit}    from '@angular/core';
-import {Http, Headers} from '@angular/http';
-import 'rxjs/add/operator/toPromise';
 
 import {User} from '../domain/user';
 import {UserService} from "./user.service";
+import {GenericHttpService} from "./generic-http.service";
 
-//TODO: Wrap angular core errors
 @Injectable()
 export class UserServiceImpl extends UserService implements OnInit{
     private loginUri = "/api/login";
@@ -18,15 +16,20 @@ export class UserServiceImpl extends UserService implements OnInit{
     private userUri = "/api/user";
     private currentUser: User = undefined;
 
-
-    private headers = new Headers({'Content-Type': 'application/json'});
-
-    constructor(private http: Http){
+    constructor(
+        private httpService: GenericHttpService
+    ){
         super();
     }
 
     ngOnInit(): void {
-        this.fetchCurrentUser();
+        this.fetchCurrentUser()
+            .then(user => {
+                this.authorizeUser(user);
+            })
+            .catch(err => {
+                this.unauthorizeUser();
+            });
     }
 
     isUserAuthorised(): Promise<boolean>{
@@ -39,126 +42,69 @@ export class UserServiceImpl extends UserService implements OnInit{
     }
 
     getCurrentUser():Promise<User>{
-        var user = this.currentUser;
-        if (typeof user === 'undefined') {
-            console.log("user is undefined yet");
-            return this.fetchCurrentUser();
-        }
-        else {
+        var _self = this;
+        if (typeof _self.currentUser !== 'undefined') {
             console.log("return user promise");
             return new Promise(function (resolve, reject) {
-                resolve(user);
+                resolve(_self.currentUser);
+            });
+        }
+        else {
+            console.log("user is undefined yet");
+            return new Promise((resolve, reject) =>{
+                this.fetchCurrentUser()
+                    .then(user => {
+                        _self.authorizeUser(user);
+                        resolve(user);
+                    })
+                    .catch(err => {
+                        _self.unauthorizeUser();
+                        reject(err);
+                    });
             });
         }
     }
 
     login(email: string, password: string): Promise<User>{
-        var _self = this;
-        return new Promise(function(resolve, reject) {
-            _self.http
-                .post(
-                    _self.loginUri,
-                    JSON.stringify({email: email, password: password}),
-                    {headers: _self.headers}
-                )
-                .toPromise()
-                .then(res => {
-                    var user: User = res.json();
-                    _self.authorizeUser(user);
-                    resolve(user);
-                    UserServiceImpl.logSuccess(res);
-                })
-                .catch(err => {
-                    reject(err);
-                    UserServiceImpl.handleError(err);
-                });
-        });
+        return this.authTemplate(this.loginUri, <User>{email: email, password: password});
     }
 
     register(email: string, password: string): Promise<User>{
+        return this.authTemplate(this.userUri, <User>{email: email, password: password});
+    }
+
+    private authTemplate(uri: string, user: User): Promise<User>{
         var _self = this;
         return new Promise(function(resolve, reject) {
-            _self.http
-                .post(
-                    _self.userUri,
-                    JSON.stringify({email: email, password: password}),
-                    {headers: _self.headers}
-                )
-                .toPromise()
-                .then(res => {
-                    var user: User = res.json();
+            _self.httpService.doPost(uri, user)
+                .then(user => {
                     _self.authorizeUser(user);
                     resolve(user);
-                    UserServiceImpl.logSuccess(res);
                 })
-                .catch(err => {
-                    reject(err);
-                    UserServiceImpl.handleError(err);
-                });
+                .catch(err => reject(err));
         });
     }
 
     isEmailFree(email: string): Promise<boolean>{
-        var _self = this;
-        return new Promise(function (resolve, reject) {
-            if(typeof email === 'undefined' || email === null || email === ''){
-                reject("Can't be null!");
-            } else {
-                _self.http
-                    .get(
-                        `${_self.userUri}/${email}/free`
-                    )
-                    .toPromise()
-                    .then(res => {
-                        resolve(res.json());
-                        UserServiceImpl.logSuccess(res);
-                    })
-                    .catch(err => {
-                        reject(err);
-                        UserServiceImpl.handleError(err)
-                    })
-            }
-        });
+        if(typeof email === 'undefined' || email === null || email === ''){
+            return new Promise((resolve, reject) => reject("Can't be null"));
+        }
+        return this.httpService.doGet(`${this.userUri}/${email}/free`);
     }
 
     logout(): Promise<boolean>{
         var _self = this;
-        return new Promise(function(resolve) {
-            _self.http
-                .post(
-                    _self.logoutUri,
-                    {headers: _self.headers}
-                )
-                .toPromise()
+        return new Promise((resolve, reject) => {
+            this.httpService.doPost(this.logoutUri, undefined)
                 .then(res => {
-                    _self.unauthorizeUser();
-                    resolve(res.json());
-                    UserServiceImpl.logSuccess(res);
+                    if(res === true){
+                        _self.unauthorizeUser();
+                        resolve(true);
+                    } else {
+                        resolve(false);
+                    }
                 })
-                .catch(err => {
-                    resolve(false);
-                    UserServiceImpl.handleError(err);
-                })
-        });
-    }
-
-    private fetchCurrentUser(): Promise<User>{
-        var _self = this;
-        return new Promise(function(resolve, reject) {
-            _self.http
-                .get(_self.userUri)
-                .toPromise()
-                .then(res => {
-                    var user: User = res.json();
-                    _self.authorizeUser(user);
-                    resolve(user);
-                    UserServiceImpl.logSuccess(res);
-                })
-                .catch(err => {
-                    _self.unauthorizeUser();
-                    reject(err);
-                    UserServiceImpl.handleError(err);
-                });
+                .catch(err => resolve(false));
         });
     }
 
@@ -171,11 +117,7 @@ export class UserServiceImpl extends UserService implements OnInit{
         this.authorizeUser(null);
     }
 
-    private static logSuccess(res: any){
-        console.log(res);
-    }
-
-    private static handleError(err: any){
-        console.error(err);
+    private fetchCurrentUser(): Promise<User>{
+        return this.httpService.doGet(this.userUri);
     }
 }

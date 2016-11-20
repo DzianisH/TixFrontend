@@ -2,15 +2,10 @@
  * Created by DzianisH on 09.11.2016.
  */
 
-
-import {Injectable, OnInit}    from '@angular/core';
-import {Http, Headers} from '@angular/http';
-import 'rxjs/add/operator/toPromise';
-
 import {User} from '../domain/user';
 
 
-export abstract class UserService extends OnInit{
+export abstract class UserService{
     abstract isUserAuthorised(): Promise<boolean>;
     abstract getCurrentUser(): Promise<User>;
 
