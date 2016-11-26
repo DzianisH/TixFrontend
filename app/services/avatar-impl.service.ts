@@ -7,7 +7,6 @@ import {Avatar} from "../domain/avatar";
 import 'rxjs/add/operator/toPromise';
 import {Injectable, OnInit} from "@angular/core";
 import {UserService} from "./user.service";
-import { Headers} from "@angular/http";
 import {GenericHttpService} from "./generic-http.service";
 
 @Injectable()
@@ -43,7 +42,7 @@ export class AvatarServiceImpl extends AvatarService implements OnInit{
     getCurrentAvatar(): Promise<Avatar> {
         const _self = this;
         return new Promise((resolve, reject) => {
-            var avatar = _self.activeAvatar;
+            let avatar = _self.activeAvatar;
             if(typeof avatar !== 'undefined'){
                 resolve(avatar);
             } else {
@@ -60,7 +59,7 @@ export class AvatarServiceImpl extends AvatarService implements OnInit{
     getUserAvatarList(): Promise<Avatar[]> {
         const _self = this;
         return new Promise((resolve, reject) => {
-            var avatarList = _self.userAvatarList;
+            let avatarList = _self.userAvatarList;
             if(typeof avatarList !== 'undefined'){
                 resolve(avatarList);
             } else {

@@ -23,6 +23,7 @@ import {AvatarServiceImpl} from "./services/avatar-impl.service";
 import {AvataredGuard} from "./guards/avatared.guard";
 import {LoggingService} from "./services/logging.service";
 import {GenericHttpService} from "./services/generic-http.service";
+import {RoomService} from "./services/room.service";
 
 @NgModule({
     imports: [
@@ -46,6 +47,7 @@ import {GenericHttpService} from "./services/generic-http.service";
         {provide: AvatarService, useClass: AvatarServiceImpl},
         LoggingService,
         GenericHttpService,
+        RoomService,
         LoggedInGuard,
         AvataredGuard,
         Location

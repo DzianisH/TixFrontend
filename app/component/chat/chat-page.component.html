@@ -1,4 +1,9 @@
 <div>
-    <p>Fill free to chat here!</p>
-    <room></room>
+    <div class="tab-wrapper">
+        <span *ngFor="let room of rooms" (click)="enableRoom(room.id)"
+              [ngClass]="{'active-tab': room.id === activeRoomId}" class="tab">{{room.title | uppercase}}</span>
+    </div>
+    <div *ngFor="let room of rooms">
+        <room *ngIf="activeRoomId === room.id" [room]="room"></room>
+    </div>
 </div>

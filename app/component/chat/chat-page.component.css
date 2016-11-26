@@ -1,0 +1,29 @@
+.tab-wrapper {
+    width: 100%;
+    margin: 0;
+    padding: 0.2em 0.1em 0 0.1em;
+    border: none;
+    background: #4c6685;
+}
+.tab {
+    border-radius: 6em 10em 10em 2em;
+    border-left: 0.3em solid;
+    border-color: #4c6685;
+    margin: 1em 0 0.3em 0;
+    padding: 0 0.8em 0 0.3em;
+    background: none;
+    color: #ffffff;
+    cursor: hand;
+}
+
+.tab:hover{
+    border-color: #00b7dc;
+}
+
+.active-tab:hover{
+    border-color: #00dfff;
+}
+
+.active-tab {
+    border-color: #00dfff;
+}

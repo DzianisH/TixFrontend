@@ -35,8 +35,8 @@ export class GenericHttpService{
     }
 
     doPost(uri: string, data: any): Promise<any>{
-        var _self = this;
-        return new Promise(function(resolve, reject) {
+        const _self = this;
+        return new Promise((resolve, reject) => {
             _self.http
                 .post(
                     uri,
@@ -56,8 +56,8 @@ export class GenericHttpService{
     }
 
     doPut(uri: string, data: any): Promise<any>{
-        var _self = this;
-        return new Promise(function(resolve, reject) {
+        const _self = this;
+        return new Promise((resolve, reject) => {
             _self.http
                 .put(
                     uri,
@@ -77,8 +77,8 @@ export class GenericHttpService{
     }
 
     doDelete(uri: string): Promise<any>{
-        var _self = this;
-        return new Promise(function(resolve, reject) {
+        const _self = this;
+        return new Promise((resolve, reject) => {
             _self.http
                 .delete(
                     uri,
