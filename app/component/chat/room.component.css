@@ -5,3 +5,9 @@
     padding: 1em;
     margin: 0;
 }
+
+.message-input {
+    margin: auto;
+    align-self: center;
+    width: 70%;
+}

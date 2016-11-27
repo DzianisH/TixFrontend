@@ -21,4 +21,8 @@ export class RoomComponent implements OnInit{
             "all works fine!"
         ];
     }
+
+    send(messageText: string): void{
+        console.log('Mock sending message: ' + messageText);
+    }
 }
