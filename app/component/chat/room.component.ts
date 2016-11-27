@@ -1,6 +1,7 @@
 
 import {Component, Input, OnInit} from "@angular/core";
 import {Room} from "../../domain/room";
+import {MessageService} from "../../services/message.service";
 
 @Component({
     moduleId: module.id,
@@ -13,6 +14,11 @@ export class RoomComponent implements OnInit{
     private room: Room = null;
     private dummyMessages = [];
 
+    constructor(
+        private messageService: MessageService
+    ){}
+
+
     ngOnInit(): void {
         this.dummyMessages = [
             "Welcome to " + this.room.title + " room",
@@ -23,6 +29,7 @@ export class RoomComponent implements OnInit{
     }
 
     send(messageText: string): void{
-        console.log('Mock sending message: ' + messageText);
+        console.log('sending message: ' + messageText);
+        this.messageService.send(messageText);
     }
 }
